@@ -11,9 +11,8 @@ inquirer
   })
   .then(function ({ username }) {
     const queryUrl = `https://api.github.com/users/${username}`;
-    // make an API request to githubs API to get the users repos
+    // make an API request to githubs API to get the users email
     axios.get(queryUrl).then((response) => {
-      // get the name of each repository as a string
       console.log(response.data.avatar_url);
       callQuestions(response.data.avatar_url);
     });
@@ -62,15 +61,29 @@ const questions = [
     type: "input",
     name: "tests",
     message:
-      "How do you run th tests on this repo (assuming the testing has been implemented)",
+      "How do you run the tests on this repo (assuming the testing has been implemented)",
   },
   // What are your Questions? [Array: string]: [What is the meaning of life? "how do I install this application?"]
   {
     type: "input",
     name: "questions",
-    message: "Who to contact for questions about the repo and how?",
+    message: "Who to contact for questions about the repo?",
   },
-  // What is your github profile picture? [string]
+  {
+    type: "input",
+    name: "email",
+    message: "Email address used to address questions about repo",
+  },
+  {
+    type: "list",
+    name: "badge",
+    message:
+      "Would you like the site badge to say maintained or not? (1st link maintained, 2nd link not)",
+    choices: [
+      "https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activityhttps://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity",
+      "https://img.shields.io/badge/Maintained%3F-no-red.svg)](https://bitbucket.org/lbesson/ansi-colors",
+    ],
+  },
   // What is your github email? [string]
 ];
 
@@ -80,6 +93,7 @@ function callQuestions(profilePic) {
     let createReadMe = (answers) => {
       return `
 # Project Title: ${answers.title}
+[![Maintenance](${answers.badge})
 ## Description 
 ${answers.description}
 ## Table of Contents 
@@ -104,28 +118,18 @@ ${answers.contributors}
 ${answers.tests}
 ## Questions 
 ${answers.questions}
+
+${answers.email}
       `;
     };
+    // create a file with name fileName
+    // write to file fileName the data
     fs.writeFile("README.md", createReadMe(answers), function (err) {
       if (err) {
         throw err;
       }
       console.log("Your README has been created!");
       // where do I wqant the file to be placed? Desktop? Local directory? Do i need to check?
-      // create a file with name fileName
-      // write to file fileName the data
     });
   });
 }
-
-// fs.writeFile(fileName, data) {
-// where do I wqant the file to be placed? Desktop? Local directory? Do i need to check?
-// create a file with name fileName
-// write to file fileName the data
-// }
-
-// function init() {
-// initialize stuff that I need here
-// }
-
-// init();
