@@ -1,5 +1,7 @@
 # Project Title: README-Generator
 
+---
+
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-no-red.svg)](https://bitbucket.org/lbesson/ansi-colors)
 
 ## Description
@@ -43,3 +45,11 @@ This Repo does not include testing.
 Michael Veiga
 
 mvee333@gmail.com
+
+## Images
+
+![First Step](\assets\images\first-step.JPG)
+
+![Second Step](\assets\images/second-step.jpg)
+
+![Third Step](\assets\images/third-step.jpg)

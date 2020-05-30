@@ -93,6 +93,7 @@ function callQuestions(profilePic) {
     let createReadMe = (answers) => {
       return `
 # Project Title: ${answers.title}
+---
 [![Maintenance](${answers.badge})
 ## Description 
 ${answers.description}
